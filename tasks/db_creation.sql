@@ -44,6 +44,27 @@ Kritériumok az adatbázissal kapcsolatban:
     - az adatbázis, a táblák és a mezők elnevezése rajtad áll, azonban használj angol megnevezéseket, méghozzá következetesen
       (ha az egyik táblában camel-case szerinti mező-neveket adtál, akkor a másik táblában is tégy úgy)
 
+
+  Megoldás:
+  CREATE TABLE `registeredusers` (
+    `id` int(10) NOT NULL,
+    `name` varchar(20) NOT NULL,
+    `e-mail` varchar(20) NOT NULL,
+    `password` varchar(10) NOT NULL,
+    `isActive` tinyint(1) NOT NULL,
+    `dateOfRegistration` date NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+  CREATE TABLE `messages` (
+    `sender` varchar(20) NOT NULL,
+    `addressedTo` varchar(20) NOT NULL,
+    `textmessage` varchar(500) NOT NULL,
+    `sentDate` date NOT NULL,
+    `id` varchar(10) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 */
 
 

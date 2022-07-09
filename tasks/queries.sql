@@ -32,6 +32,10 @@ Jó munkát!
 
     Elvárt eredmény:
         -1523
+
+    Megoldás:
+    SELECT MIN(`IndepYear`) FROM `country`;
+
 */
 
 
@@ -44,6 +48,9 @@ Jó munkát!
 
     Elvárt eredmény:
         CHN Code-ú ország (China)
+
+    Megoldás:
+    SELECT * FROM `country` WHERE `IndepYear` IS NOT NULL ORDER BY `IndepYear` LIMIT 1;
 */
 
 
@@ -56,6 +63,10 @@ Jó munkát!
         550 rekord
         ID szerint növekvő sorrendben az első 5 darab: 2, 3, 8, 11, 34
         ID szerint növekvő sorrendben az utolsó 3 darab: 4076, 4078, 4079
+
+        Megoldás:
+        SELECT * FROM `city` WHERE `Name` =`District` ORDER BY `ID`;
+
 */
 
 
@@ -68,6 +79,11 @@ Jó munkát!
     Elvárt eredmény:
         7 rekord
         országnevek: Bangladesh, Bahrain, Kuwait, Mauritania, Qatar, Sudan, Sierra Leone
+
+        Megoldás:
+        SELECT `Name`, `HeadOfState` FROM `country`
+        WHERE `HeadOfState` LIKE '%Ahmad%' OR `HeadOfState` LIKE '%Ahmed%' OR `HeadOfState` LIKE '%Hamad%';
+
 */
 
 
@@ -80,6 +96,10 @@ Jó munkát!
     Elvárt eredmény:
         10 rekord
         kontinensek: Oceania (7 db), Europe (2), South America (1)
+
+     Megoldás:
+     SELECT * FROM `country` WHERE `LifeExpectancy` IS NULL AND `Population` > 0;
+
 */
 
 
@@ -91,6 +111,9 @@ Jó munkát!
 
     Elvárt eredmény:
         63 rekord
+
+        Megoldás:
+        SELECT `Code`, `Name` , `GNP` , `GNPOld` FROM `country` WHERE `GNPOld`>`GNP`;
 */
 
 
@@ -102,6 +125,10 @@ Jó munkát!
 
     Elvárt eredmény:
         29 rekord
+
+    Megoldás:
+    SELECT `Language` FROM `countrylanguage` WHERE `Language` LIKE '%ian' GROUP BY `Language` ORDER BY `Language` ASC;
+
 */
 
 
@@ -115,6 +142,10 @@ Jó munkát!
         Southern Europe: 15
         Western Europe: 9
         Eastern Europe 10
+
+        Megoldás:
+        SELECT `Region`, COUNT(*) FROM `country` WHERE `Region` LIKE '%Europe%' GROUP BY `Region`;
+
 */
 
 
@@ -129,6 +160,12 @@ Jó munkát!
         239 rekord
         első országkód: AFG
         utolsó országkód: ZWE
+
+     Megoldás:
+     SELECT `country`.`Code` , `country`.`Name` FROM `country`
+     LEFT JOIN `city` ON `country`.`Capital` = `city`.`ID` ORDER BY `country`.`Name` ASC;
+
+
 */
 
 
@@ -140,6 +177,9 @@ Jó munkát!
     Elvárt eredmény:
         10 rekord
         a városok ID-ja: 61, 62, 1791, 2316, 2317, 2728, 2805, 2806, 3333, 3538
+
+        Megoldás:
+        SELECT * FROM `city` WHERE `Population` > 99 AND `Population` < 1000;
 */
 
 
@@ -153,6 +193,11 @@ Jó munkát!
     Elvárt eredmény:
         35 rekord
         országkódok, amelyek szerepelnek a listában: DNK, FIN, FRO, ISL, NOR, SJM, SWE
+
+      Megoldás:
+      SELECT * FROM `city` INNER JOIN `country` ON `country`.`Code` = `city`.`CountryCode`
+       WHERE `country`.`Region` LIKE 'Nordic Countries' ORDER BY `city`.`CountryCode`, `city`.`Population` DESC;
+
 */
 
 
@@ -168,6 +213,11 @@ Jó munkát!
         19 rekord
         legkisebb: Northern Africa (1)
         legnagyobb: Caribbean (11)
+
+        Megoldás:
+        SELECT `Region`, COUNT(*) AS 'number' FROM `country`
+        WHERE `IndepYear` IS NULL OR `IndepYear` < 1500 GROUP BY (`Region`) ORDER BY COUNT(*) DESC;
+
 */
 
 
@@ -179,6 +229,12 @@ Jó munkát!
     Elvárt eredmény:
         16 rekord
         országkódok: ABW, ANT, BHR, BRN, COK, DNK, ISL, JPN, KWT, MAC, MCO, MDV, MYS, NOR, PRI, TTO
+
+      Megoldás:
+      SELECT * FROM `country` INNER JOIN `countrylanguage`
+      ON `country`.`Code` = `countrylanguage`.`CountryCode`
+      WHERE `countrylanguage`.`Language` LIKE 'English' and `IsOfficial` = 'F';
+
 */
 
 
@@ -190,6 +246,9 @@ Jó munkát!
     Elvárt eredmény:
         7 rekord
         országkódok: ATA, ATF, BVT, HMD, IOT, SGS, UMI
+
+        SELECT * FROM `country` LEFT JOIN `city` ON `country`.`Code` = `city`.`CountryCode` WHERE `city`.`Name` IS NULL;
+
 */
 
 
@@ -201,6 +260,13 @@ Jó munkát!
 
     Elvárt eredmény:
         65 rekord
+
+    Megoldás:
+    SELECT `Name` , `Continent` , `Region` , `countrylanguage`.`Language` , `countrylanguage`.`Percentage`
+    FROM `country` INNER JOIN `countrylanguage` ON `country`.`Code` = `countrylanguage`.`CountryCode`
+    WHERE `Percentage` = 0;
+
+
 */
 
 
